@@ -20,7 +20,4 @@ def update(name, age, category):
 
     query_res = client.query(query, job_config=query_config)  # Make an API request.
 
-    if query_res == []:
-        return('New rows have been added.')
-    else:
-        return(f'Encountered errors while inserting rows: {query_res}')
+    return "done"

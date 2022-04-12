@@ -12,7 +12,7 @@ def profile(user_id):
     """
     query_config = bigquery.QueryJobConfig(
         query_parameters=[
-            bigquery.ScalarQueryParameter("id", "INTEGER", user_id),
+            bigquery.ScalarQueryParameter("id", "STRING", user_id),
         ]
     )
 
