@@ -18,12 +18,25 @@ def hello_world():
 
 @app.route("/user/profile", methods=['GET'])
 def show_profile():
+    """ profile user API
+
+    Typical Usage:
+    curl -X GET "https://internpractice-hivq6xk2fq-de.a.run.app/user/profile?user_id=<id>"
+    
+    """
     user_id = request.args.get('user_id')
     result = profile(user_id)
     return result
 
 @app.route("/user/insert", methods=['POST'])
 def run_insert():
+    """ insert user API
+
+    Typical Usage:
+    curl -X POST "https://internpractice-hivq6xk2fq-de.a.run.app/user/insert?name=<name>&age=<age>&category=<category>" \
+    -H "Content-Length: 0"
+    
+    """
     name = request.args.get('name')
     age = request.args.get('age')
     category = request.args.get('category')
@@ -32,6 +45,13 @@ def run_insert():
 
 @app.route("/user/update", methods=['PUT'])
 def run_update():
+    """ update user API
+
+    Typical Usage:
+    curl -X PUT "https://internpractice-hivq6xk2fq-de.a.run.app/user/update?name=<name>&age=<age>&category=<category>" \
+    -H "Content-Length: 0"
+    
+    """
     name = request.args.get('name')
     age = request.args.get('age')
     category = request.args.get('category')
@@ -40,6 +60,12 @@ def run_update():
 
 @app.route("/user/delete", methods=['DELETE'])
 def run_delete():
+    """ delete user API
+
+    Typical Usage:
+    curl -X DELETE "https://internpractice-hivq6xk2fq-de.a.run.app/user/delete?user_id=<id>"
+    
+    """
     user_id = request.args.get('user_id')
     result = delete(user_id)
     return result
