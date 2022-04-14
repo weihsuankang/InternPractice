@@ -1,9 +1,15 @@
-import os
+from utils.check_name import check_name
 
 from google.cloud import bigquery
 
 def update(name, age, category):
-    # simple non parameterized query
+    # check if parameter is complete
+    if not name or not age or not category:
+        return "status:failed, \n message:need to enter name, age, category for completeness"
+    # check if user exist
+    if check_name(name) == False:
+        return f"status:failed, \n do not found user {name}"
+
     client = bigquery.Client()
     query = """
         UPDATE `ikala-cloud-sandbox-sammy.ikala_newbie.staff`
@@ -20,4 +26,4 @@ def update(name, age, category):
 
     query_res = client.query(query, job_config=query_config)  # Make an API request.
 
-    return "done"
+    return "status:sucess"

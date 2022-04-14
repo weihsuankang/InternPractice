@@ -3,7 +3,10 @@ import os
 from google.cloud import bigquery
 
 def insert(name, age, category):
-    # simple non parameterized query
+    # check if parameter is complete
+    if not name or not age or not category:
+        return "status:failed, \n message:need to enter name, age, category for completeness"
+
     client = bigquery.Client()
     query = """
         INSERT INTO `ikala-cloud-sandbox-sammy.ikala_newbie.staff`
@@ -20,10 +23,4 @@ def insert(name, age, category):
 
     query_res = client.query(query, job_config=query_config)  # Make an API request.
 
-    output = {}
-    for row in query_res:
-        output["name"] = row.name
-        output["age"] = row.age
-        output["category"] = row.category
-
-    return output
+    return "status:success"

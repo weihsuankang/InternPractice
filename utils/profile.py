@@ -1,9 +1,15 @@
-import os
+from utils.check_id import check_id
 
 from google.cloud import bigquery
 
 def profile(user_id):
-    # simple non parameterized query
+    # check if parameter is complete
+    if not user_id:
+        return "status:failed, \n message:need to enter user_id(STRING) for completeness"
+    # check if user exist
+    if check_id(user_id) == False:
+        return f"status:failed, \n do not found user {user_id}"
+
     client = bigquery.Client()
     query = """
         SELECT id, name, age, category 
@@ -26,7 +32,4 @@ def profile(user_id):
         output["age"] = row.age
         output["category"] = row.category
 
-    if output == {}:
-        return f"User_id: {user_id} could not found"
-    else:
-        return output
+    return output
